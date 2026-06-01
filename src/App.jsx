@@ -73,34 +73,40 @@ export default function App() {
   function handleReplay() { setScreen(SCREENS.ONBOARD) }
 
   return (
-    <>
-      {showInstructor && (
-        <InstructorDashboard onClose={() => setShowInstructor(false)} />
-      )}
+    <div className="min-h-screen flex flex-col">
+      <div className="flex-1">
+        {showInstructor && (
+          <InstructorDashboard onClose={() => setShowInstructor(false)} />
+        )}
 
-      {screen === SCREENS.ONBOARD && (
-        <Onboarding onStart={handleStart} onInstructor={() => setShowInstructor(true)} />
-      )}
+        {screen === SCREENS.ONBOARD && (
+          <Onboarding onStart={handleStart} onInstructor={() => setShowInstructor(true)} />
+        )}
 
-      {screen === SCREENS.SIM && (
-        <Simulation
-          key={scenarioIndex}
-          scenario={SCENARIOS[scenarioIndex]}
-          scenarioIndex={scenarioIndex}
-          totalScenarios={SCENARIOS.length}
-          totalScore={totalScore}
-          onSubmit={handleSubmit}
-          onNext={handleNext}
-        />
-      )}
+        {screen === SCREENS.SIM && (
+          <Simulation
+            key={scenarioIndex}
+            scenario={SCENARIOS[scenarioIndex]}
+            scenarioIndex={scenarioIndex}
+            totalScenarios={SCENARIOS.length}
+            totalScore={totalScore}
+            onSubmit={handleSubmit}
+            onNext={handleNext}
+          />
+        )}
 
-      {screen === SCREENS.RESULTS && (
-        <Results
-          totalScore={totalScore}
-          scenarioScores={scenarioScores}
-          onReplay={handleReplay}
-        />
-      )}
-    </>
+        {screen === SCREENS.RESULTS && (
+          <Results
+            totalScore={totalScore}
+            scenarioScores={scenarioScores}
+            onReplay={handleReplay}
+          />
+        )}
+      </div>
+
+      <footer className="py-4 text-center text-xs text-stone-400 bg-stone-50">
+        Inspired by economics-games.com • © 2026 Trinh Nguyen Chau
+      </footer>
+    </div>
   )
 }
